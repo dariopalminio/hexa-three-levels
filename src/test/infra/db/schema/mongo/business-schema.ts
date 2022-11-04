@@ -19,4 +19,11 @@ export class Business implements IBusiness{
 }
 
 export const BusinessSchema = SchemaFactory.createForClass(Business);
-
+/**
+ * A Mongoose schema defines the structure of the document, default values, validators, etc., 
+ * whereas a Mongoose model provides an interface to the database for creating, querying, updating, 
+ * deleting records, etc.
+ * In NestJS Schemas are used to define Models. Models are responsible for creating and reading documents 
+ * from the underlying MongoDB database. Schemas can be created with NestJS decorators, or with Mongoose 
+ * itself manually.
+ */
