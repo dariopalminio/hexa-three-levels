@@ -12,6 +12,7 @@
  */
  export interface IRepository<T> {
 
+    //read and update operations
     getAll(page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<Array<T>>;
     find(query: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<Array<T>>; 
     getById(id: string, fieldsToExclude?: any): Promise<T>;
@@ -19,12 +20,14 @@
     getByQuery(query: any): Promise<T>;
     hasById(id: string): Promise<boolean> ;
     hasByQuery(query: any): Promise<boolean>;
+    findExcludingFields(query: any, fieldsToExclude: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<any[]>;
+    count(query: any): Promise<number>;
+
+    //update operations
     create(doc: T): Promise< T>;
     updateById<R>(entityId: string, doc: R | T): Promise<boolean>;
     update(query: any, valuesToSet: any): Promise<boolean>;
     delete(id: string): Promise<boolean>;
-    findExcludingFields(query: any, fieldsToExclude: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<any[]>;
-    count(query: any): Promise<number>;
     
   };
   
