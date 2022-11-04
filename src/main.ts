@@ -1,8 +1,21 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { AppTestModule } from './test/app/app-test.module';
+
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  console.log('Nest factory start');
+  const app = await NestFactory.create<NestExpressApplication>(AppTestModule, {
+    cors: {
+      origin: '*',
+    },
+  });
+
+  app.enableCors();
+
+  app.useGlobalPipes(new ValidationPipe()); //used to validations with class-validator
+  
   await app.listen(3000);
 }
 bootstrap();

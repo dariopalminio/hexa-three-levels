@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { BusinessController } from '../../app/controller/business.controller';
-import { BusinessService } from '../../domain/business.service';
+import { BusinessController } from './business.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BusinessSchema } from '../../infra/db/schema/mongo/business-model';
-import { rootMongooseTestModule, closeInMongodConnection } from '../infra/database/mongo-connection-to-test';
+import { rootMongooseTestModule, closeInMongodConnection } from '../../infra/db/mongo-connection-to-test';
+import { BusinessService } from '../../domain/service/business.service';
+import { BusinessRepository } from '../../infra/db/repository/mongo/business.repository';
 
-describe('AppController', () => {
+describe('BusinessController', () => {
   let businessController: BusinessController;
 
   beforeEach(async () => {
@@ -17,7 +18,16 @@ describe('AppController', () => {
         ])
       ],
       controllers: [BusinessController],
-      providers: [BusinessService],
+      providers: [
+        {
+          provide: 'IBusinessService',
+          useClass: BusinessService,
+        },
+        {
+          provide: 'IBusinessRepository',
+          useClass: BusinessRepository,
+        }
+      ],
     }).compile();
 
     businessController = app.get<BusinessController>(BusinessController);
