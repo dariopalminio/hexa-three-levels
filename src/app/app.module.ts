@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { BusinessController } from './controller/business.controller';
 import { BusinessService } from '../domain/business.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BusinessSchema } from 'src/infra/database/schema/business-model';
-import DB_CONNECTION from 'src/infra/database/db-connection';
+import { BusinessSchema } from 'src/infra/db/schema/mongo/business-model';
+import DB_CONNECTION from 'src/infra/db/mongo-db-connection';
 
 @Module({
   imports: [

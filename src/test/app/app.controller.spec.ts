@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BusinessController } from '../../app/controller/business.controller';
 import { BusinessService } from '../../domain/business.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BusinessSchema } from '../../infra/database/schema/business-model';
+import { BusinessSchema } from '../../infra/db/schema/mongo/business-model';
 import { rootMongooseTestModule, closeInMongodConnection } from '../infra/database/mongo-connection-to-test';
 
 describe('AppController', () => {
