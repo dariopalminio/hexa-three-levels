@@ -66,7 +66,7 @@ export class BusinessController {
     if (!newCat) throw new NotFoundException('Business does not exist or canot delete Business!');
     return res.status(HttpStatus.OK).json({
       message: 'Business Created Successfully',
-      Business: newCat
+      business: newCat
     })
   };
 

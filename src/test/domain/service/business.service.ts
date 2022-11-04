@@ -29,6 +29,6 @@ export class BusinessService extends GenericService<IBusiness, Business> impleme
 
   getHello(): string {
     return 'Hello World!' ;
-  }
+  };
 
 };
