@@ -19,7 +19,7 @@ import { GenericRepository } from '../../../../../infra/db/repository/mongo/gene
 export class BusinessRepository extends GenericRepository<BusinessDocument, Business> implements IRepository<Business> {
 
     constructor(
-        @InjectModel('BusinessSchema')
+        @InjectModel('BusinessModel')
         businessModel: Model<BusinessDocument>,
     ) { 
         super(businessModel, new BusinessEntityFactory());

@@ -14,7 +14,7 @@ describe('BusinessController', () => {
       imports: [
         rootMongooseTestModule(),
         MongooseModule.forFeature([
-          { name: 'BusinessSchema', schema: BusinessSchema },
+          { name: 'BusinessModel', schema: BusinessSchema },
         ])
       ],
       controllers: [BusinessController],
