@@ -4,7 +4,13 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "GNU",
+  "main": "./dist/index.js",
+  "module": "./esm/index.js",
+  "files": [
+    "dist/**",
+    "esm/**"
+  ],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

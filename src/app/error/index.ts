@@ -1,0 +1,1 @@
+export { IAppErrorHandler } from './app-error-handler.interface'
