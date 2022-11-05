@@ -18,7 +18,7 @@ export class BusinessController {
     @Inject('IBusinessService')
     private readonly businessService: IBusinessService<Business>
   ) {
-    this.appErrorHandler = AppNestErrorHandler.getInstance();
+    this.appErrorHandler = new AppNestErrorHandler();
   }
 
 

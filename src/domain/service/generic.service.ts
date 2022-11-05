@@ -19,8 +19,8 @@ import { IPersistentAggregateService } from './interface/persistent.aggregate.in
 export class GenericService<D, T> implements IPersistentAggregateService<T> {
 
     constructor(
-        private readonly repository: IRepository<T>,
-        private readonly factory: IEntityFactory<T>
+        protected readonly repository: IRepository<T>,
+        protected readonly factory: IEntityFactory<T>
     ) { }
 
 

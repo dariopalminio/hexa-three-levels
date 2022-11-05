@@ -12,6 +12,6 @@ import { IPersistentAggregateService } from 'src/domain/service/interface/persis
 export interface IBusinessService<T> extends IPersistentAggregateService<T>{
 
     getHello(): string;
-
+    getByQueryExcludingFields(query: any, fieldsToExclude: any): Promise<any>;
 };
 

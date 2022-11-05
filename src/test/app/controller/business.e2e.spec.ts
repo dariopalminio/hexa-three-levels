@@ -1,11 +1,12 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { HttpServer, INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppTestModule } from '../app-test.module';
 
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
+  let httpServer: HttpServer;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
@@ -14,10 +15,12 @@ describe('AppController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
+    // Reference the server instance
+    httpServer = app.getHttpServer()
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
+    return request(httpServer)
       .get('/')
       .expect(200)
       .expect('Hello World!');
@@ -37,7 +40,7 @@ describe('AppController (e2e)', () => {
       }
     }
 
-    const response1 = await request(app.getHttpServer())
+    const response1 = await request(httpServer)
       .post('/create')
       .send(createDTO);
 
@@ -47,7 +50,7 @@ describe('AppController (e2e)', () => {
     expect(response1.body.business.meta.nickName).toBe(createDTO.meta.nickName);
 
     //Test --> @Get('/key/:key')
-    const response2 = await request(app.getHttpServer())
+    const response2 = await request(httpServer)
       .get('/key/business');
     expect(response2.status).toBe(200);
     expect(response2.body.meta.nickName).toBe(createDTO.meta.nickName);
@@ -67,7 +70,7 @@ describe('AppController (e2e)', () => {
       }
     }
 
-    const response1 = await request(app.getHttpServer())
+    const response1 = await request(httpServer)
       .post('/create')
       .send(createDTO);
 
@@ -78,7 +81,7 @@ describe('AppController (e2e)', () => {
 
     //Test --> @Get('/id/:BusinessID')
     const businessID = response1.body.business.id;
-    const response2 = await request(app.getHttpServer())
+    const response2 = await request(httpServer)
       .get('/id/' + businessID);
     expect(response2.status).toBe(200);
     expect(response2.body.key).toBe(createDTO.key);
@@ -88,6 +91,7 @@ describe('AppController (e2e)', () => {
 
   afterAll(async () => {
     app.close();
+    httpServer.close();
   });
 
 });

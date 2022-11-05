@@ -79,7 +79,7 @@ export class Business extends Entity implements IValidatable, IMarshable<Busines
         this.key = value;
     };
 
-    public setMeta(value: string) {
+    public setMeta(value: any) {
         this.meta = value;
     };
 

@@ -7,25 +7,9 @@ import { IAppErrorHandler } from "src/app/error/app-error-handler.interface";
 import { DomainError } from "../../../domain/error/domain-error";
 
 /**
- * App Nest Error Handler (Singleton)
+ * App Nest Error Handler 
  */
 export class AppNestErrorHandler implements IAppErrorHandler<HttpException> {
-
-    private static instance: AppNestErrorHandler;
-
-    private constructor() { }
-
-    /**
-    * The Singleton class defines the `getInstance` method that lets clients access
-    * the unique singleton instance.
-    */
-    public static getInstance(): AppNestErrorHandler {
-        if (!AppNestErrorHandler.instance) {
-            AppNestErrorHandler.instance = new AppNestErrorHandler();
-        }
-
-        return AppNestErrorHandler.instance;
-    }
 
     /**
      * Create an http exception according to the exception received from the domain.

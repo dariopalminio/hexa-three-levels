@@ -31,4 +31,8 @@ export class BusinessService extends GenericService<IBusiness, Business> impleme
     return 'Hello World!' ;
   };
 
+  getByQueryExcludingFields(query: any, fieldsToExclude: any): Promise<any> {
+    return this.repository.getByQueryExcludingFields(query,fieldsToExclude);
+  }
+
 };
