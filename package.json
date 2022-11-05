@@ -1,24 +1,27 @@
 {
   "name": "hexa-three-levels",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "TypeScript library for hexa3-architecture",
   "author": "",
   "private": true,
   "license": "GNU",
+  "keywords": [
+    "hexagonal-architecture"
+  ],
   "main": "./dist/index.js",
-  "module": "./esm/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist/**",
-    "esm/**"
+    "dist/**"
   ],
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "nest build",
+    "build": "tsc",
+    "build:esm": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start": "",
+    "start:dev": "",
+    "start:debug": "",
+    "start:prod": "node dist/index.ts",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --runInBand --detectOpenHandles",
     "test:integration": "jest --config ./test/jest-e2e.json --runInBand",
@@ -26,6 +29,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./src/test/jest-e2e.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dariopalminio/hexa-three-levels.git"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",

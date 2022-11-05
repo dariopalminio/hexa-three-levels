@@ -9,3 +9,6 @@ export {
 export {
     ErrorCode
 } from './error-code.enum';
+
+
+export const testLib = () => {console.log("---->testLib is OK!");}
