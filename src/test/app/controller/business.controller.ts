@@ -1,19 +1,25 @@
 import {
   Inject, Controller, Get, Post, Delete, Res, Put, Query, Body,
-  Param, BadRequestException, HttpStatus, NotFoundException
+  Param, BadRequestException, HttpStatus, NotFoundException, HttpException
 } from '@nestjs/common';
 import { IBusinessService } from '../../domain/incomming/business-service.interface';
 import { Business } from '../../domain/model/business/business';
 import { PaginatedResult } from '../../../domain/model/paginated-result';
-import { AppErrorHandler } from '../error/app-error-handler';
+import { AppNestErrorHandler } from '../error/app-error-handler';
 import { BusinessDTO } from '../dto/business.dto';
+import { IAppErrorHandler } from 'src/app/error/app-error-handler.interface';
 
 @Controller()
 export class BusinessController {
+
+  appErrorHandler: IAppErrorHandler<HttpException>;
+
   constructor(
     @Inject('IBusinessService')
     private readonly businessService: IBusinessService<Business>
-  ) { }
+  ) {
+    this.appErrorHandler = AppNestErrorHandler.getInstance();
+  }
 
 
   @Get()
@@ -27,7 +33,7 @@ export class BusinessController {
       const list: Business[] = await this.businessService.getAll();
       return res.status(HttpStatus.OK).json(list);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     };
   };
 
@@ -37,7 +43,7 @@ export class BusinessController {
     try {
       Business = await this.businessService.getById(BusinessID);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     }
     if (!Business) throw new NotFoundException('Business does not exist!');
     return res.status(HttpStatus.OK).json(Business);
@@ -49,7 +55,7 @@ export class BusinessController {
     try {
       Business = await this.businessService.getByQuery({ key: key });
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     }
     if (!Business) throw new NotFoundException('Business does not exist!');
     return res.status(HttpStatus.OK).json(Business);
@@ -61,7 +67,7 @@ export class BusinessController {
     try {
       newCat = await this.businessService.create(createBusinessDTO);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     }
     if (!newCat) throw new NotFoundException('Business does not exist or canot delete Business!');
     return res.status(HttpStatus.OK).json({
@@ -77,7 +83,7 @@ export class BusinessController {
     try {
       BusinessDeleted = await this.businessService.delete(id);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     }
     if (!BusinessDeleted) throw new NotFoundException('Business does not exist or canot delete Business!');
     return res.status(HttpStatus.OK).json({
@@ -93,7 +99,7 @@ export class BusinessController {
     try {
       updatedBusiness = await this.businessService.updateById(id, BusinessDTO);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     };
     if (!updatedBusiness) throw new NotFoundException('Problem in creation. Business does not exist!');
     return res.status(HttpStatus.OK).json({
@@ -115,7 +121,7 @@ export class BusinessController {
       const data: PaginatedResult<any> = await this.businessService.search({}, page, limit, orderByField, isAscending);
       return res.status(HttpStatus.OK).json(data);
     } catch (error) {
-      throw AppErrorHandler.createHttpException(error);
+      throw this.appErrorHandler.createHttpException(error);
     }
   };
 
