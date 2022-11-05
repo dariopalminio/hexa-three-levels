@@ -32,7 +32,6 @@ Main concepts for this architecture Hexa3L are around codebase scalability using
         └── etc 
 ```
 
-
 ## Installation
 
 ```bash
