@@ -26,6 +26,37 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Architecture
+
+Main concepts for this architecture Hexa3L are around codebase scalability using Arquitectura hexagonal and DDD. The goal is to provide a clean architecture while flexible for implementing and growing functionalities into the codebase.
+
+![Hexa3](doc/architecture/hexa3-clean-architecture.png)
+
+## Folder structure
+
+```bash
+.
+└── src
+    ├── app # Layer that exposes application to external world and users, and configure and launch the application module(s)
+    │     ├── middleware # called before the route handler or controllers
+    │     ├── filter
+    │     ├── guard # Authorizator that determine whether a given request will be handled by the route handler or not
+    │     ├── dto # Data Transfer Objects 
+    │     └── controller # API Controllers responsible for handling incoming requests and returning responses to the client (routing)
+    ├── domain # Layer for the domain to Business Logic
+    │     ├── incoming # input-port, services interfaces 
+    │     ├── service # Layer that composes application use cases 
+    │     ├── model # Business domain classes and everything that composes domain model (Entities and Value Objects)
+    │     └── outgoing # output-port to infrastructure interfaces
+    │
+    └── infra # Layer for communication with what is external of application and infrastructure
+        ├── database # output-port to infrastructure interfaces
+        │     ├── repository # implementation of repository pattern
+        │     └── schema # Model schema for database
+        └── etc 
+```
+
+
 ## Installation
 
 ```bash
