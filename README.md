@@ -41,7 +41,10 @@ The hexagonal architecture is based on three principles and techniques:
         │     └── schema # Model schema for database
         └── etc 
 ```
-## Hexa-three-levels proposal implementation diagram
+## Hexa-three-levels, proposal implementation diagram
+
+
+In this diagram, the light blue elements are the ones that this library contains, the others are the ones that can be created for particular implementations. Generic types are used where T indicates the name of the type of the entity to implement.
 
 ![Hexa3-class-diagram](doc/img/hexa3-levels_general-class-diagram.png)
 
@@ -49,7 +52,7 @@ The hexagonal architecture is based on three principles and techniques:
 
 The error management strategy used is to have the individual services in the domain throw a new subclass of DomainError(), and have the controller catch them and then, via an error handler or an interceptor, throw the appropriate type of HttpException (BadRequestException, ForbiddenException, etc. ). Having Http related stuff in domain layer (services) just seems wrong. For this reason, the domain layer does not handle http exceptions and will only attach an error code included in Domain Error to help the app layer determine which http exception corresponds.
 
-![Hexa3-error-manager](hexa3-levels_error_manager_strategy.png)
+![Hexa3-error-manager](doc/img/hexa3-levels_error_manager_strategy.png)
 
 The app layer (controllers, middleware, etc.) will throw exceptions in the response with the following JSON format:
 ```bash
