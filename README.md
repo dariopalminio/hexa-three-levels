@@ -104,6 +104,9 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+## References
+
+- https://blog.octo.com/hexagonal-architecture-three-principles-and-an-implementation-example/#:~:text=The%20hexagonal%20architecture%20is%20based,by%20using%20Ports%20and%20Adapters
 
 ## Stay in touch
 
