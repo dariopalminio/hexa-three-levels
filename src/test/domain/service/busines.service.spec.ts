@@ -7,7 +7,7 @@ import { Business } from '../model/business/business';
 import { IBusinessService } from '../incomming/business-service.interface';
 import { BusinessSchema } from '../../infra/db/schema/mongo/business-schema';
 
-describe('businessService', () => {
+describe('Integration test: test GenericService & MongoGenericRepository through businessService', () => {
   let businessService: IBusinessService<Business>;
 
   beforeEach(async () => {
@@ -43,14 +43,12 @@ describe('businessService', () => {
     });
   });
 
-  describe('businessService.create', () => {
+  describe('Generic Service, create method', () => {
 
-    it('should return entity created', async () => {
+    it('should return entity created (positive)', async () => {
       const dto = {
         "key": "colocolo",
-        "meta": {
-          "nickName": "colocolo"
-        }
+        "meta": { "nickName": "colocolo" }
       };
       const entity: Business = new Business(dto);
       const entityCreated: Business = await businessService.create(entity);
@@ -58,14 +56,12 @@ describe('businessService', () => {
     });
   });
 
-  describe('businessService.updateById', () => {
+  describe('Generic Service, updateById method', () => {
 
-    it('should create, edit (using updateById method) and return entity updated', async () => {
+    it('should create, edit (using updateById method) and return entity updated (positive)', async () => {
       const dto = {
         "key": "name",
-        "meta": {
-          "nickName": "daro"
-        }
+        "meta": { "nickName": "daro" }
       };
       const entity: Business = new Business(dto);
       let entityCreated: Business = await businessService.create(entity);
@@ -80,15 +76,12 @@ describe('businessService', () => {
     });
   });
 
-  describe('businessService.update', () => {
+  describe('Generic Service, update method', () => {
 
-    it('should create, edit  (using update method) and return entity updated', async () => {
+    it('should create, edit  (using update method) and return entity updated (positive)', async () => {
       const dto = {
         "key": "toy",
-        "meta": {
-          "nickName": "apple",
-          "document": "27000111-9"
-        }
+        "meta": { "nickName": "apple", "document": "27000111-9" }
       };
       const entity: Business = new Business(dto);
       let entityCreated: Business = await businessService.create(entity);
@@ -96,10 +89,7 @@ describe('businessService', () => {
       entityCreated.setMeta({ nickName: "andres" })
       const id: string = entityCreated.getId();
       const updated: boolean = await businessService.update({ "key": "toy" }, {
-        "meta": {
-          "nickName": "apple changed",
-          "document": "changed"
-        }
+        "meta": { "nickName": "apple changed", "document": "changed" }
       });
       expect(updated).toBe(true);
       const entityUpdated: Business = await businessService.getById(id);
@@ -108,21 +98,19 @@ describe('businessService', () => {
     });
   });
 
-  describe('businessService.getByQueryExcludingFields', () => {
+  describe('Generic Service, getByQueryExcludingFields method', () => {
 
-    it('getByQueryExcludingFields should return the result of a search excluding fields', async () => {
+    it('getByQueryExcludingFields should return the result of a search excluding fields (positive)', async () => {
       const dto1 = {
         "key": "key1",
         "meta": {
-          "nickName": "nickName1",
-          "document": "document1"
+          "nickName": "nickName1", "document": "document1"
         }
       };
       const dto2 = {
         "key": "key2",
         "meta": {
-          "nickName": "nickName2",
-          "document": "document2"
+          "nickName": "nickName2", "document": "document2"
         }
       };
       const entity1: Business = new Business(dto1);
@@ -138,6 +126,100 @@ describe('businessService', () => {
     });
   });
 
+  describe('Generic Service, findExcludingFields method', () => {
+
+    it('findExcludingFields should return an array containing 5 unmarshalled elements with id field typeof string (positive)', async () => {
+      const dto = {
+        "key": "key",
+        "meta": { "nickName": "nickName" }
+      };
+
+      //add 10 entities in database
+      for (let i = 0; i < 10; i++) {
+        let unmarshalled = dto;
+        unmarshalled.key = "key" + i;
+        if ((i % 2) == 0) {
+          unmarshalled = {
+            ...dto, meta: {
+              nickName: "objective"
+            }
+          };
+        }
+        const entity: Business = new Business(unmarshalled);
+        await businessService.create(entity);
+      }
+
+      //find result using query filter and excluding fields
+      const fieldsToExclude = {
+        key: 0 //exclude this field
+      };
+
+      const queryFuilter = {
+        "meta": { "nickName": "objective" }
+      };
+      const page = 1, limit = 5, orderByField = "meta", isAscending = true;
+      const result: any[] = await businessService.findExcludingFields(queryFuilter, fieldsToExclude, page, limit, orderByField, isAscending);
+
+      expect(result).toBeDefined();
+      expect(result.length).toBe(5);
+      expect(result[0].meta.nickName).toBe("objective");
+      expect(result[0].id).toBeDefined();
+      expect(typeof result[0].id).toEqual('string');
+
+    });
+  });
+
+  describe('Generic Service, getAll method', () => {
+
+    it('getAll should return an array containing entity elements instanceOf Entity (positive)', async () => {
+      const dto = {
+        "key": "key",
+        "meta": { "nickName": "nickName" }
+      };
+
+      //add 10 entities in database
+      for (let i = 0; i < 10; i++) {
+        let unmarshalled = dto;
+        unmarshalled.key = "key" + i;
+        const entity: Business = new Business(unmarshalled);
+        await businessService.create(entity);
+      }
+
+      //get all 
+      const result: Business[] = await businessService.getAll();
+
+      expect(result).toBeDefined();
+      expect(result.length).toBe(10);
+      expect(result[0]).toBeInstanceOf(Business);
+      expect(typeof result[0].getId()).toEqual('string');
+    });
+  });
+
+  describe('Generic Service, delete method', () => {
+
+    it('delete should return true and the entity must have been deleted in the database (positive)', async () => {
+      const dto = {
+        "key": "turing",
+        "meta": { "nickName": "tu" }
+      };
+      const entity: Business = new Business(dto);
+      const entityCreated: Business = await businessService.create(entity);
+      expect(entityCreated.key).toBe(dto.key);
+      const id: string = entityCreated.getId();
+      const deleted: boolean = await businessService.delete(id);
+      expect(deleted).toBe(true);
+      let found: boolean = false;
+      try {
+        const entityFound: Business = await businessService.getById(id);
+        if (entityFound) {
+          found = true;
+        }
+      } catch (err) {
+        found = false; //not found was deleted
+      }
+      expect(found).toBe(false);
+    });
+  });
 
   afterAll(async () => {
     await closeInMongodConnection();

@@ -36,7 +36,7 @@ export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepo
         return this.castArrayDocToArrayDomainEntity(arrayDoc);
     };
 
-    async find(query: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<T[]> {
+    async find(query: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<Array<T>> {
         try {
             let arrayDoc: D[];
 
@@ -75,18 +75,12 @@ export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepo
      * Page 2: skip = 10, limit = 10
      * Page 3: skip = 20, limit = 10
      * 
-     * Products.find(filter)
-        .sort({[column]: order })
-        .skip(parseInt(pageNumber, 10) * parseInt(nPerPage, 10))
-        .limit(parseInt(nPerPage, 10));
-        ((parseInt(page.toString(), 10)) - 1 ) * parseInt(limit.toString(), 10); //number = 
-{ orderByField: -1 } .sort( { _id: -1 } )
      * @param query filter
-     * @param projection fieldsToExclude
-     * @param page 
+     * @param fieldsToExclude projection fields To Exclude
+     * @param page //pointer selected
      * @param limit //The limit is used to specify the maximum number of results to be returned.
-     * @param orderByField 
-     * @param isAscending 
+     * @param orderByField //field name
+     * @param isAscending [true | false]
      * @returns 
      */
     async findExcludingFields(query: any, fieldsToExclude: any, page?: number, limit?: number, orderByField?: string, isAscending?: boolean): Promise<any[]> {
@@ -117,7 +111,7 @@ export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepo
                 resultArray.push(itemResult)
             });
 
-            return arrayDoc;
+            return resultArray;
         } catch (error) {
             if ((error.name === 'CastError') && (error.path === '_id')) {
                 throw new IdFormatError('', error.message, error);
@@ -136,6 +130,9 @@ export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepo
     async getById(id: string): Promise<T> {
         try {
             const doc: D | null = await this.model.findById(id).exec();
+            if (doc === null){
+                throw new NotFoundError('', `Not found entity with id: ${id}`);
+            }
             const objCasted: T = this.factory.createInstance(doc);
             return objCasted;
         } catch (error) {
@@ -227,7 +224,9 @@ export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepo
             const unmarshalled: any = entity.convertToAny();
             const { id, ...values } = unmarshalled;
             const docUpdated: D | null = await this.model.findByIdAndUpdate(entityId, { ...values, updatedAt: new Date() }, { useFindAndModify: false }).exec();
-            if (docUpdated === null) throw new NotFoundError('', `The ${entityId} not found or problem to save changes!`);
+            if (docUpdated === null) {
+                throw new NotFoundError('', `The ${entityId} not found or problem to save changes!`);
+            }
             return !!docUpdated;
         } catch (error) {
             if ((error.name === 'CastError') && (error.path === '_id')) {
