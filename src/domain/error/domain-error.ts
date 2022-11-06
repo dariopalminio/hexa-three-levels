@@ -104,3 +104,35 @@ export class DuplicateError extends DomainError {
       Error.captureStackTrace(this, this.constructor);
   }
 };
+
+/**
+ * Defines an Generic Domain Error for Failed Dependency type errors.
+ */
+ export class FailedDependencyError extends DomainError {
+  constructor(message: string, detail?: string, data?: any) {
+      const codeErr = ErrorCode.FAILED_DEPENDENCY;
+      const msg = 'Some dependency or external service has failed. ' + message;
+      const detailed = detail ? detail : message;
+      const dat = data ? data : {};
+      super(codeErr, msg, detailed, dat);
+      this.name = this.constructor.name;
+      Error.captureStackTrace(this, this.constructor);
+  }
+};
+
+/**
+ * Defines an Generic Domain Error for Internal Server type errors.
+ * Internal Server Error	When something goes wrong on the server, 
+ * the consumer can’t do anything about it. Just let them know there’s a problem and that they should try again later or contact support.
+ */
+ export class InternalServerError extends DomainError {
+  constructor(message: string, detail?: string, data?: any) {
+      const codeErr = ErrorCode.INTERNAL_SERVER_ERROR;
+      const msg = 'Something goes wrong on the server and should try again later or contact support. ' + message;
+      const detailed = detail ? detail : message;
+      const dat = data ? data : {};
+      super(codeErr, msg, detailed, dat);
+      this.name = this.constructor.name;
+      Error.captureStackTrace(this, this.constructor);
+  }
+};

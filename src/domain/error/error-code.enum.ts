@@ -9,6 +9,7 @@ export enum ErrorCode {
     NOT_FOUND = 404, // Entity not found or search not found
     REQUEST_TIMEOUT = 408,
     UNSUPPORTED_MEDIA_TYPE = 415,
+    FAILED_DEPENDENCY = 424,
     NO_CONTENT = 204,
     OK = 200,
 };

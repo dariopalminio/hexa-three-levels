@@ -4,6 +4,8 @@ export {
     NotFoundError,
     DuplicateError,
     IdFormatError,
+    InternalServerError,
+    FailedDependencyError
 } from './domain-error';
 
 export {
