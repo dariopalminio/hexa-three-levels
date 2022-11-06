@@ -4,11 +4,19 @@ Implementation of hexa3 architecture (hex - adapter port) using Typescript, [Nes
 
 ## Architecture
 
-Main concepts for this architecture Hexa3L are around codebase scalability using Arquitectura hexagonal and DDD. The goal is to provide a clean architecture while flexible for implementing and growing functionalities into the codebase.
+Main concepts for this architecture Hexa Three Levels are around codebase scalability using Arquitectura hexagonal and DDD. The goal is to provide a clean architecture while flexible for implementing and growing functionalities into the codebase.
 
-![Hexa3](doc/img/hexa3-clean-architecture.png)
+![Hexa3-clean-architecture.png](doc/img/hexa3-clean-architecture.png)
 
-## Folder structure
+The hexagonal architecture is based on three principles and techniques:
+
+- Explicitly separate User-Side, Business Logic, and Server-Side
+- Dependencies are going from User-Side and Server-Side to the Business Logic
+- We isolate the boundaries by using Ports and Adapters
+
+![Hexa3-general_idea](doc/img/hexa3-levels_general_idea.png)
+
+## Folder structure for tree levels
 
 ```bash
 .
@@ -30,6 +38,31 @@ Main concepts for this architecture Hexa3L are around codebase scalability using
         │     ├── repository # implementation of repository pattern
         │     └── schema # Model schema for database
         └── etc 
+```
+
+## Errors Management Strategy
+
+The error management strategy used is to have the individual services in the domain throw a new subclass of DomainError(), and have the controller catch them and then, via an error handler or an interceptor, throw the appropriate type of HttpException (BadRequestException, ForbiddenException, etc. ). Having Http related stuff in domain layer (services) just seems wrong. For this reason, the domain layer does not handle http exceptions and will only attach an error code included in Domain Error to help the app layer determine which http exception corresponds.
+
+![Hexa3-error-manager](hexa3-levels_error_manager_strategy.png)
+
+The app layer (controllers, middleware, etc.) will throw exceptions in the response with the following JSON format:
+```bash
+{
+    "statusCode": 400,
+    "timestamp": "2022-11-03T20:38:09.613Z",
+    "path": "/api/webshop/v1/profiles/all",
+    "payload": {
+        "code": 400,
+        "detail": "Not authorized by the Auth Guard Middleware because no authorization data in Header.",
+        "data": {
+            "method": "GET",
+            "url": "/api/webshop/v1/profiles/all"
+        },
+        "name": "HeadersAuthorizationError"
+    },
+    "message": "The headers Authorization in HTTP Request has a format error."
+}
 ```
 
 ## Installation
