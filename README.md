@@ -12,9 +12,9 @@ Main concepts for this architecture Hexa Three Levels are around codebase scalab
 
 The hexagonal architecture is based on three principles and techniques:
 
-- Explicitly separate User-Side, Business Logic, and Server-Side
-- Dependencies are going from User-Side and Server-Side to the Business Logic
-- We isolate the boundaries by using Ports and Adapters
+- Explicitly separate User-Side (app), Business Logic (domain), and Server-Side (infra).
+- Dependencies are going from User-Side and Server-Side to the Business Logic (domain).
+- We isolate the boundaries by using Ports (interfaces) and Adapters (implementations).
 
 ![Hexa3-general_idea](doc/img/hexa3-levels_general_idea.png)
 
