@@ -79,19 +79,6 @@ The app layer (controllers, middleware, etc.) will throw exceptions in the respo
 $ npm install
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
 ## Test
 
 ```bash
@@ -104,9 +91,44 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
+
+## Build the lib
+
+```bash
+# build
+$ npm run build
+
+# create pack hexa-three-levels-X.Y.Z.tgz
+$ npm pack   
+
+```
+
+
+## Lib manual and local installation
+
+The project where you want to import the library:
+
+```bash
+$ npm install hexa-three-levels-X.Y.Z.tgz
+```
+
+The library is installed in:
+
+```bash
+.
+└── node_modules
+    ├── hexa-three-levels # lib
+```
+
+And use:
+```bash
+import { IRepository } from "hexa-three-levels";
+```
+
 ## References
 
 - https://blog.octo.com/hexagonal-architecture-three-principles-and-an-implementation-example/#:~:text=The%20hexagonal%20architecture%20is%20based,by%20using%20Ports%20and%20Adapters
+- https://www.tsmean.com/articles/how-to-write-a-typescript-library/
 
 ## Stay in touch
 
