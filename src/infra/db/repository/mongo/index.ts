@@ -1,3 +1,3 @@
 export {
     MongoGenericRepository
-} from './generic-repository'
+} from './mongo-generic-repository'

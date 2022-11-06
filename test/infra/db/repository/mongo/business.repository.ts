@@ -5,7 +5,7 @@ import { Business } from '../../../../domain/model/business/business';
 import { BusinessEntityFactory } from '../../../../domain/model/business/business-entity.factory';
 import { IRepository } from 'src/domain/outgoing/repository.interface';
 import { BusinessDocument } from '../../schema/mongo/business-schema';
-import { GenericRepository } from 'src/infra/db/repository/mongo/generic-repository';
+import { MongoGenericRepository } from 'src/infra/db/repository/mongo/mongo-generic-repository';
 
 
 /**
@@ -16,7 +16,7 @@ import { GenericRepository } from 'src/infra/db/repository/mongo/generic-reposit
  * The secondary adapters are called by the service (use cases). 
  */
 @Injectable()
-export class BusinessRepository extends GenericRepository<BusinessDocument, Business> implements IRepository<Business> {
+export class BusinessRepository extends MongoGenericRepository<BusinessDocument, Business> implements IRepository<Business> {
 
     constructor(
         @InjectModel('BusinessModel')
