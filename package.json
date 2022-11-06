@@ -4,7 +4,7 @@
   "description": "TypeScript library for hexa3-architecture",
   "author": "",
   "private": true,
-  "license": "GNU",
+  "license": "MIT",
   "keywords": [
     "hexagonal-architecture"
   ],

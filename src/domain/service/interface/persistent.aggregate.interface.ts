@@ -1,4 +1,4 @@
-import { PaginatedResult } from "src/domain/model/paginated-result";
+import { PaginatedResult } from "../../model/paginated-result";
 
 /**
  * Persistent-Aggregate-Service Interface
