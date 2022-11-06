@@ -89,7 +89,7 @@ describe('AppController (e2e)', () => {
 
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     app.close();
     httpServer.close();
   });

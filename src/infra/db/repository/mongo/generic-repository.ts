@@ -12,7 +12,7 @@ import { IRepository } from '../../../../domain/outgoing/repository.interface';
  * D: Mongoose Document type
  * T: Entity class type
  */
-export class GenericRepository<D, T extends IMarshable<T>> implements IRepository<T> {
+export class MongoGenericRepository<D, T extends IMarshable<T>> implements IRepository<T> {
 
     constructor(
         private readonly model: Model<D>, // Model Schema
