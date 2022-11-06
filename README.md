@@ -2,11 +2,13 @@
 
 Implementation of hexa3 architecture (hex - adapter port) using Typescript, [Nest](https://github.com/nestjs/nest) and mongo.
 
-## Architecture
+## Global Architecture Draft
 
 Main concepts for this architecture Hexa Three Levels are around codebase scalability using Arquitectura hexagonal and DDD. The goal is to provide a clean architecture while flexible for implementing and growing functionalities into the codebase.
 
 ![Hexa3-clean-architecture.png](doc/img/hexa3-clean-architecture.png)
+
+## Hexagonal three levels
 
 The hexagonal architecture is based on three principles and techniques:
 
@@ -16,7 +18,7 @@ The hexagonal architecture is based on three principles and techniques:
 
 ![Hexa3-general_idea](doc/img/hexa3-levels_general_idea.png)
 
-## Folder structure for tree levels
+## Folder structure for three levels
 
 ```bash
 .
@@ -39,6 +41,9 @@ The hexagonal architecture is based on three principles and techniques:
         │     └── schema # Model schema for database
         └── etc 
 ```
+## Hexa-three-levels proposal implementation diagram
+
+![Hexa3-class-diagram](doc/img/hexa3-levels_general-class-diagram.png)
 
 ## Errors Management Strategy
 
