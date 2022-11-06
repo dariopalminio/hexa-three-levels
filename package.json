@@ -2,7 +2,7 @@
   "name": "hexa-three-levels",
   "version": "1.0.1",
   "description": "TypeScript library for hexa3-architecture",
-  "author": "",
+  "author": "Dario Palminio",
   "private": false,
   "license": "MIT",
   "keywords": [
