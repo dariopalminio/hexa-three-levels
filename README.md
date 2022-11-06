@@ -1,6 +1,9 @@
 ## Description
 
-Implementation of hexa3 architecture (hex - adapter port) using Typescript, [Nest](https://github.com/nestjs/nest) and mongo.
+This is a library that implement hexa three architecture (hexagonal and port/adapter) using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/).
+The library has typescript code and nestjs is only used in the test since it was originally intended to be used with nest.
+
+The library is to show a way to implement the architecture and provide some useful interfaces and classes for your implementation.
 
 ## Global Architecture Draft
 
