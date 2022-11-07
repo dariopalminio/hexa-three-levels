@@ -1,7 +1,6 @@
 ## Description
 
-This is a library that implement hexa three architecture (hexagonal and port/adapter) using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/).
-The library has typescript code and nestjs is only used in the test since it was originally intended to be used with nest.
+This is a library that implement hexa three architecture (hexagonal and port/adapter) for Back-end, using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/). The library has typescript code and nestjs is only used in the tests, since it was originally intended to be used with nest.
 
 The library is to show a way to implement the architecture and provide some useful interfaces and classes for your implementation.
 
@@ -127,6 +126,26 @@ And use:
 ```bash
 import { IRepository } from "hexa-three-levels";
 ```
+
+## Lib manual and local installation with Link
+
+
+Install lib in a folder parallel to your project folder.
+```bash
+.
+└── hexa-three-levels # lib project
+├── my-project 
+```
+Go hexa-three-levels folder and use: npm link
+Go to the libconsumer (my-project) directory and run: npm link hexa-three-levels
+
+And use.
+```bash
+import { IRepository } from "hexa-three-levels";
+...
+```
+
+To unbind: npm unlink hexa-three-levels
 
 ## References
 
