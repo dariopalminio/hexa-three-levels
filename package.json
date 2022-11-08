@@ -1,7 +1,7 @@
 {
   "name": "hexa-three-levels",
   "version": "1.2.0",
-  "description": "TypeScript library for hexa3-architecture",
+  "description": "TypeScript library that helps you to implement hexagonal architecture best practises.",
   "author": "Dario Palminio",
   "private": false,
   "license": "MIT",
@@ -9,6 +9,8 @@
     "hexagonal architecture",
     "hexagonal back-end", 
     "hexagonal for nestjs", 
+    "hexagonal",
+    "architecture",
     "clean code in back-end",
     "mongo mapper",
     "mongo ORM"
