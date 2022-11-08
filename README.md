@@ -1,8 +1,8 @@
 ## Description
 
-This is a library that implement hexa three architecture (hexagonal and port/adapter) for Back-end, using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/). The library has typescript code and nestjs is only used in the tests, since it was originally intended to be used with nest.
+This is a library that implement Three Levels Hexagonal Architecture for Back-end, using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/). The library has typescript code and nestjs is only used in the tests, since it was originally intended to be used with nest.
 
-The library is to show a way to implement the architecture and provide some useful interfaces and classes for your implementation.
+The Clean Architectures and specifically the Hexagonal Architecture can help us make our code more maintainable, testable and scalable. The library is to show a way to implement the architecture and provide some useful interfaces and classes for your implementation.
 
 ## Global Architecture Draft
 
@@ -25,7 +25,7 @@ The hexagonal architecture is based on three principles and techniques:
 ```bash
 .
 └── src
-    ├── app # Layer that exposes application to external world and users, and configure and launch the application module(s)
+    ├── application # Layer that exposes application to external world and users, and configure and launch the application module(s)
     │     ├── middleware # called before the route handler or controllers
     │     ├── filter
     │     ├── guard # Authorizator that determine whether a given request will be handled by the route handler or not
@@ -37,7 +37,7 @@ The hexagonal architecture is based on three principles and techniques:
     │     ├── model # Business domain classes and everything that composes domain model (Entities and Value Objects)
     │     └── outgoing # output-port to infrastructure interfaces
     │
-    └── infra # Layer for communication with what is external of application and infrastructure
+    └── infrastructure # Layer for communication with what is external of application and infrastructure
         ├── database # output-port to infrastructure interfaces
         │     ├── repository # implementation of repository pattern
         │     └── schema # Model schema for database
@@ -151,6 +151,7 @@ To unbind: npm unlink hexa-three-levels
 
 - https://blog.octo.com/hexagonal-architecture-three-principles-and-an-implementation-example/#:~:text=The%20hexagonal%20architecture%20is%20based,by%20using%20Ports%20and%20Adapters
 - https://www.tsmean.com/articles/how-to-write-a-typescript-library/
+- https://www.npmjs.com/package/eslint-plugin-hexagonal-architecture
 
 ## Stay in touch
 

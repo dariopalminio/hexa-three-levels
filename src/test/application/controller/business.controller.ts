@@ -7,7 +7,7 @@ import { Business } from '../../domain/model/business/business';
 import { PaginatedResult } from '../../../domain/model/paginated-result';
 import { AppNestErrorHandler } from '../error/app-error-handler';
 import { BusinessDTO } from '../dto/business.dto';
-import { IAppErrorHandler } from 'src/app/error/app-error-handler.interface';
+import { IAppErrorHandler } from 'src/application/error/app-error-handler.interface';
 
 @Controller()
 export class BusinessController {

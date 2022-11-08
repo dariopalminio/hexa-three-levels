@@ -1,11 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule } from '@nestjs/mongoose';
-import { closeInMongodConnection, rootMongooseTestModule } from '../../infra/db/mongo-connection-to-test';
+import { closeInMongodConnection, rootMongooseTestModule } from '../../infrastructure/db/mongo-connection-to-test';
 import { BusinessService } from '../../domain/service/business.service';
-import { BusinessRepository } from '../../infra/db/repository/mongo/business.repository';
+import { BusinessRepository } from '../../infrastructure/db/repository/mongo/business.repository';
 import { Business } from '../model/business/business';
 import { IBusinessService } from '../incomming/business-service.interface';
-import { BusinessSchema } from '../../infra/db/schema/mongo/business-schema';
+import { BusinessSchema } from '../../infrastructure/db/schema/mongo/business-schema';
 
 describe('Integration test: test GenericService & MongoGenericRepository through businessService', () => {
   let businessService: IBusinessService<Business>;

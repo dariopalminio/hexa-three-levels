@@ -3,7 +3,7 @@ import {
     HttpStatus, InternalServerErrorException, NotFoundException,
     UnauthorizedException
 } from "@nestjs/common";
-import { IAppErrorHandler } from "src/app/error/app-error-handler.interface";
+import { IAppErrorHandler } from "src/application/error/app-error-handler.interface";
 import { DomainError } from "../../../domain/error/domain-error";
 
 /**
