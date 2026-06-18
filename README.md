@@ -1,5 +1,5 @@
 # hexa-three-levels
-> ⚠️ **Disclaimer**: This is a learning exercise and proof of concept. Not for production use. [Leer más](#disclaimer)
+> ⚠️ **Disclaimer**: This is a learning exercise and proof of concept. Not for production use. [read more in Disclaimer]
  
 ## Description
 
@@ -160,7 +160,6 @@ To unbind: npm unlink hexa-three-levels
 
 - Author - [Dario Palminio](linkedin.com/in/palminio)
 
-#disclaimer
 
 ## 📌 Disclaimer
 
