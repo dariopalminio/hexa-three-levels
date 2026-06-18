@@ -1,3 +1,6 @@
+# hexa-three-levels
+> ⚠️ **Disclaimer**: This is a learning exercise and proof of concept. Not for production use. [Leer más](#disclaimer)
+ 
 ## Description
 
 This is a library that implement Three Levels Hexagonal Architecture for Back-end, using [Typescript](https://www.typescriptlang.org/), [Nest](https://github.com/nestjs/nest) and [mongoose](http://mongoosejs.com/) for [MongoDB](https://www.mongodb.org/). The library has typescript code and nestjs is only used in the tests, since it was originally intended to be used with nest.
@@ -156,4 +159,16 @@ To unbind: npm unlink hexa-three-levels
 ## Stay in touch
 
 - Author - [Dario Palminio](linkedin.com/in/palminio)
+
+## 📌 Disclaimer
+
+> **⚠️ Important Notice**  
+> This library is **purely a learning exercise and a proof of concept**. It is **not intended nor recommended** for use in production environments or real-world projects.
+>
+> Its purpose is to illustrate a possible implementation of Hexagonal Architecture and DDD principles, but it **does not constitute a mature, maintained, or secure solution** for production-grade applications.
+>
+> I encourage you to **take the lessons and patterns** shown here and **apply them directly in your own backend**, building a codebase that is **100% yours, flexible, maintainable, and tailored to your specific needs**. Architecture is not bought on npm; it is designed and cultivated.
+
+---
+
 
