@@ -160,6 +160,8 @@ To unbind: npm unlink hexa-three-levels
 
 - Author - [Dario Palminio](linkedin.com/in/palminio)
 
+#disclaimer
+
 ## 📌 Disclaimer
 
 > **⚠️ Important Notice**  
